@@ -49,7 +49,6 @@ const CreateLinks = () => {
     const {loading, error:urlError ,data, fn:fnCreateUrl} = useFetch(createUrl,{...formValues, user_id:user.id})
     
     useEffect(()=>{
-      console.log(urlError === null && data)
       if(urlError === null && data){
         console.log(data[0])
         navigate(`/link/${data[0].id}`)

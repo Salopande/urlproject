@@ -30,3 +30,15 @@ export const storeClicks = async({id, original_url}) =>{
         console.error("Error recording clicks:", error)
     }
 }
+
+export async function getClickForUrl(id) {
+    const {data, error} = await supabase
+    .from("clicks")
+    .select("*")
+    .eq("url_id",id)
+    if(error){
+        console.Error(error.message)
+        throw new Error("unable to load state")
+    }
+    return data
+}
