@@ -9,6 +9,8 @@ import { BarLoader } from 'react-spinners';
 import { Button } from '../components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card'
 import { Copy, Download, Trash } from 'lucide-react'
+import Location from '@/components/Location';
+import DeviceStats from '@/components/DeviceStats';
 
 const Link = () => {
    const downloadImage = ()=>{
@@ -134,9 +136,9 @@ const Link = () => {
               </Card>
 
               <CardTitle>Location Data</CardTitle>
-              {/* <Location stats={clickData} /> */}
+              <Location stats={clickData} />
               <CardTitle>Device Info</CardTitle>
-              {/* <DeviceStats stats={clickData} /> */}
+              <DeviceStats stats={clickData} />
             </CardContent>
           ) : (
             <CardContent>

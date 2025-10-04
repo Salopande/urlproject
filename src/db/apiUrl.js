@@ -54,19 +54,23 @@ export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
 }
 
 export async function getLongUrl(id) {
-  let {data: shortLinkData, error: shortLinkError} = await supabase
+  const safeId = id.toString(); // ensure string
+
+  const { data, error } = await supabase
     .from("urls")
     .select("id, original_url")
-    .or(`short_url.eq.${id},custom_url.eq.${id}`)
-    .single();
+    .or(`short_url.eq."${safeId}",custom_url.eq."${safeId}"`)
+    .maybeSingle(); // use maybeSingle for 0 rows
 
-  if (shortLinkError && shortLinkError.code !== "PGRST116") {
-    console.error("Error fetching short link:", shortLinkError);
-    return;
+  if (error) {
+    console.error("Error fetching URL:", error.message);
+    throw new Error("Unable to load URL");
   }
 
-  return shortLinkData;
+  console.log("Resolved URL:", data);
+  return data;
 }
+
 
 export async function getUrl({id, user_id}){
     const {data, error} = await supabase

@@ -13,6 +13,7 @@ const RedirectLink = () => {
     id: data?.id,
     original_url: data?.original_url
   })
+  console.log(data)
   useEffect(() => {
     fn();
   }, [])

@@ -18,7 +18,7 @@ export const storeClicks = async({id, original_url}) =>{
         const device = res.type || "desktop";
         const response = await fetch("https://ipapi.co/json");
         const {city, country_name:country} = await response.json();
-
+        
         await supabase.from("clicks").insert({
             url_id:id,
             city:city,
